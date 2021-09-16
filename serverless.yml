@@ -1,0 +1,21 @@
+service: hero-serverless
+frameworkVersion: '2'
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-2
+  memorySize: 2048
+  stage: dev
+  timeout: 10
+  lambdaHashingVersion: 20201221
+package:
+  patterns:
+    - '!src/**'
+    - '!test/**'
+functions:
+  api:
+    handler: handler.api
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /

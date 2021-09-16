@@ -1,0 +1,207 @@
+swagger: "2.0"
+info:
+  description: "Doc api"
+  version: "1.0.0"
+  title: "Swagger Hero"
+tags:
+- name: "hero"
+  description: "Hero endpoints"
+schemes:
+- "http"
+paths:
+  /hero:
+  
+    post:
+      tags:
+      - "hero"
+      summary: "Add hero"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Create"
+      responses:
+        "200":
+          description: "Response success"
+          schema:
+            $ref: "#/definitions/Create"
+        "400":
+          description: "Required parameters"
+
+    put:
+      tags:
+      - "hero"
+      summary: "Update hero"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Update"
+      responses:
+        "200":
+          description: "Response success"
+          schema:
+            $ref: "#/definitions/Update"
+        "400":
+          description: "Required parameters"
+
+      
+    get:
+      tags:
+      - "hero"
+      summary: "Get heroes"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Response success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Update"
+        "500":
+          description: "Internal error"
+  
+  /hero/id/:
+    get:
+      tags:
+      - "hero"
+      summary: "Find hero"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Hero id"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Response success"
+          schema:
+              $ref: "#/definitions/Update"
+        "404":
+          description: "Route not found"
+          
+    delete:
+      tags:
+      - "hero"
+      summary: "Delete hero"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Hero id"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Response success"
+        "404":
+          description: "Route not found"
+          
+  /hero/export-excel:
+    get:
+      tags:
+      - "hero"
+      summary: "Export excel heroes"
+      produces:
+      - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      responses:
+        "200":
+          description: "Response success, download file"
+        "500":
+          description: "Internal error"
+          
+  /hero/export-pdf:
+    get:
+      tags:
+      - "hero"
+      summary: "Export pdf heroes"
+      produces:
+      - "application/pdf"
+      responses:
+        "200":
+          description: "Response success, download file"
+        "500":
+          description: "Internal error"
+
+definitions:
+  Create:
+    type: "object"
+    required:
+    - "name"
+    - "alias"
+    - "species"
+    - "company"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      name:
+        type: "string"
+        example: "Tony Stark"
+      alias:
+        type: "string"
+        example: "IronMan"
+      species:
+        type: "string"
+        example: "Human"
+      company:
+        type: "object"
+        required:
+        - "name"
+        - "team"
+        properties:
+          name:
+            type: "string"
+            example: "Marvel"
+          team:
+            type: "string"
+            example: "Avengers"
+  Update:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "alias"
+    - "species"
+    - "company"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      name:
+        type: "string"
+        example: "Tony Stark"
+      alias:
+        type: "string"
+        example: "IronMan"
+      species:
+        type: "string"
+        example: "Human"
+      company:
+        type: "object"
+        required:
+        - "name"
+        - "team"
+        properties:
+          name:
+            type: "string"
+            example: "Marvel"
+          team:
+            type: "string"
+            example: "Avengers"

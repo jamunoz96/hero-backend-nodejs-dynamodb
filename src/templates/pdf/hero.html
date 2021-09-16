@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero List</title>
+    <style>
+        thead td {
+            background-color: cadetblue;
+            color: #ffff;
+            padding: 5px;
+        }
+        tbody td {
+            padding: 3px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hero List</h1>
+    <table  border="1">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Alias</td>
+                <td>Species</td>
+                <td>Company_name</td>
+                <td>Company_team</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each heroes}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.alias}}</td>
+                    <td>{{this.species}}</td>
+                    <td>{{this.company.name}}</td>
+                    <td>{{this.company.team}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>
